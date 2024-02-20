@@ -1,0 +1,91 @@
+﻿@model Mjenjačnica.Models.Model
+@{
+    ViewData["Title"] = "Create";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MJENJAČNICA</title>
+    <style>
+        /* Stilovi za modal */
+        .modal {
+            display: none; /* Skriva modal po defaultu */
+            position: fixed; /* Fiksira modalni prozor */
+            z-index: 1; /* Postavlja modal iznad ostalih elemenata */
+            left: 0;
+            top: 0;
+            width: 100%; /* Puna širina */
+            height: 100%; /* Puna visina */
+            overflow: auto; /* Omogućuje pomicanje sadržaja ako je viši od ekrana */
+            background-color: rgba(0,0,0,0.4); /* Tamni overlay */
+        }
+
+        /* Stilovi za sadržaj modala */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* Postavlja sadržaj modala u sredinu ekrana */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* Stilovi za zatvaranje modala */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+    </style>
+</head>
+<body>
+    <form asp-controller="Models" asp-action="Calculate" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="KonvertirajU" class="control-label"></label>
+            <select id="Ku" name="Ku" class="form-control" required>
+                <option value="">--</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="USD">USD</option>
+            </select>
+            <span asp-validation-for="KonvertirajU" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="KonvertirajIz" class="control-label"></label>
+            <select id="Ki" name="Ki" class="form-control" required>
+                <option value="">--</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="USD">USD</option>
+            </select>
+            <span asp-validation-for="KonvertirajU" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label"></label>
+            <input name="IznosU" class="form-control" required />
+            <span class="text-danger"></span>
+        </div>
+        <button type="submit">Izračunaj</button>
+        <div id="error-message" class="text-danger"></div>
+    </form>
+</body>
+<script>
+    document.querySelector("form").addEventListener("submit", function (event) {
+        var Ku = document.getElementById("Ku").value;
+        var Ki = document.getElementById("Ki").value;
+        if (Ku === Ki) {
+            event.preventDefault();
+            document.getElementById("error-message").textContent = "Ne mogu biti iste valute"; // Postavi poruku o grešci
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,42 @@
+﻿@model Evidencija
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            margin: 10px 0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Rezultat izračunavanja</h2>
+        <p>Valuta iz koje konvertirate: @Model.KonvertirajIz</p>
+        <p>Valuta u koju konvertirate: @Model.KonvertirajU</p>
+        <p>Iznos u @Model.KonvertirajU: @Model.IznosIz</p>
+        <p>Iznos u @Model.KonvertirajIz nakon konverzije: @Model.IznosU</p>
+        <p>Tecaj: @Model.Tecaj</p>
+        <p>Vrijeme: @Model.Vrijeme</p>
+    </div>
+</body>
+</html>
